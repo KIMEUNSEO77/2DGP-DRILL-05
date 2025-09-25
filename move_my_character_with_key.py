@@ -44,7 +44,21 @@ def handle_events():
             elif event.key == SDLK_DOWN:
                 pass
 def pickDir():
-    pass
+    if (dirIdx == -1): return
+
+    global dx, dy
+    if dirIdx == 0:
+        dx = 1
+        dy = 0
+    elif dirIdx == 1:
+        dx = -1
+        dy = 0
+    elif dirIdx == 2:
+        dx = 0
+        dy = -1
+    elif dirIdx == 3:
+        dx = 0
+        dy = 1
 
 running = True
 dx, dy = 0, 0   # 이동 x, y
