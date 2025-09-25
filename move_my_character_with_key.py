@@ -23,7 +23,7 @@ def handle_events():
             if event.key == SDLK_ESCAPE:
                 running = False
             elif event.key == SDLK_RIGHT:
-                pass
+                dirIdx = 0
             elif event.key == SDLK_LEFT:
                 pass
             elif event.key == SDLK_UP:
@@ -32,21 +32,28 @@ def handle_events():
                 pass
         elif event.type == SDL_KEYUP:
             if event.key == SDLK_RIGHT:
+                dirIdx = -1
                 idle_left = False
                 idle_right = True
             elif event.key == SDLK_LEFT:
+                dirIdx = -1
                 idle_right = False
                 idle_left = True
             elif event.key == SDLK_UP:
                 pass
             elif event.key == SDLK_DOWN:
                 pass
+def pickDir():
+    pass
 
 running = True
+dx, dy = 0, 0   # 이동 x, y
 
 while running:
     clear_canvas()
     tuk_ground.draw(TUK_WIDTH // 2, TUK_HEIGHT // 2)
+
+    pickDir()
 
     if idle_right:
         sx, sy, sw, sh = idle[0]
