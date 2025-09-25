@@ -9,11 +9,12 @@ w = 100
 h = 100
 idle = ((0, 300, w, h), (0, 200, w, h))   # 오른쪽, 왼쪽
 idle_right = False
+idle_left = False
 x, y = 600, 500   # 처음 위치는 600, 500
 dirIdx = -1   # 0: 오른쪽, 1: 왼쪽, 2: 위쪽, 3: 아래쪽
 
 def handle_events():
-    global running, idle_right
+    global running, idle_right, idle_left
     events = get_events()
     for event in events:
         if event.type == SDL_QUIT:
@@ -31,9 +32,11 @@ def handle_events():
                 pass
         elif event.type == SDL_KEYUP:
             if event.key == SDLK_RIGHT:
+                idle_left = False
                 idle_right = True
             elif event.key == SDLK_LEFT:
-                pass
+                idle_right = False
+                idle_left = True
             elif event.key == SDLK_UP:
                 pass
             elif event.key == SDLK_DOWN:
@@ -47,6 +50,9 @@ while running:
 
     if idle_right:
         sx, sy, sw, sh = idle[0]
+        character.clip_draw(sx, sy, sw, sh, x, y)
+    elif idle_left:
+        sx, sy, sw, sh = idle[1]
         character.clip_draw(sx, sy, sw, sh, x, y)
 
     update_canvas()
