@@ -7,7 +7,7 @@ character = load_image('animation_sheet.png')
 
 w = 100
 h = 100
-idle = (0, 300, w, h)
+idle = ((0, 300, w, h), (0, 200, w, h))
 
 def handle_events():
     global running
