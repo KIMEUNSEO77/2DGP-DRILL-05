@@ -56,10 +56,10 @@ def pickDir():
         dy = 0
     elif dirIdx == 2:
         dx = 0
-        dy = -1
+        dy = 1
     elif dirIdx == 3:
         dx = 0
-        dy = 1
+        dy = -1
 
 running = True
 dx, dy = 0, 0   # 이동 x, y
@@ -72,6 +72,8 @@ while running:
 
     x += dx
     y += dy
+    x = max(25, min(TUK_WIDTH - 25, x))
+    y = max(65, min(TUK_HEIGHT - 45, y))
 
     if idle_right:
         sx, sy, sw, sh = idle[0]
