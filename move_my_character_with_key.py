@@ -7,7 +7,9 @@ character = load_image('animation_sheet.png')
 
 w = 100
 h = 100
-idle = ((0, 300, w, h), (0, 200, w, h))
+idle = ((0, 300, w, h), (0, 200, w, h))   # 오른쪽, 왼쪽
+idle_right = False
+x, y = 600, 500   # 처음 위치는 600, 500
 
 def handle_events():
     global running
@@ -28,7 +30,7 @@ def handle_events():
                 pass
         elif event.type == SDL_KEYUP:
             if event.key == SDLK_RIGHT:
-                pass
+                idle_right = True
             elif event.key == SDLK_LEFT:
                 pass
             elif event.key == SDLK_UP:
@@ -41,6 +43,11 @@ running = True
 while running:
     clear_canvas()
     tuk_ground.draw(TUK_WIDTH // 2, TUK_HEIGHT // 2)
-    update_canvas()
 
+    if idle_right:
+        sx, sy, sw, sh = idle[0]
+        character.draw_clip(sx, sy, sw, sh, x, y)
+
+    update_canvas()
+    handle_events()
 close_canvas()
