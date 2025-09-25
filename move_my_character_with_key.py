@@ -14,7 +14,7 @@ x, y = 600, 500   # 처음 위치는 600, 500
 dirIdx = -1   # 0: 오른쪽, 1: 왼쪽, 2: 위쪽, 3: 아래쪽
 
 def handle_events():
-    global running, idle_right, idle_left
+    global running, idle_right, idle_left, dirIdx
     events = get_events()
     for event in events:
         if event.type == SDL_QUIT:
@@ -25,11 +25,11 @@ def handle_events():
             elif event.key == SDLK_RIGHT:
                 dirIdx = 0
             elif event.key == SDLK_LEFT:
-                pass
+                dirIdx = 1
             elif event.key == SDLK_UP:
-                pass
+                dirIdx = 2
             elif event.key == SDLK_DOWN:
-                pass
+                dirIdx = 3
         elif event.type == SDL_KEYUP:
             if event.key == SDLK_RIGHT:
                 dirIdx = -1
@@ -44,6 +44,7 @@ def handle_events():
             elif event.key == SDLK_DOWN:
                 pass
 def pickDir():
+    global dirIdx
     if (dirIdx == -1): return
 
     global dx, dy
@@ -75,6 +76,8 @@ while running:
     elif idle_left:
         sx, sy, sw, sh = idle[1]
         character.clip_draw(sx, sy, sw, sh, x, y)
+    else:
+        character.clip_draw(0, 100, w, h, x + dx, y + dy)
 
     update_canvas()
     handle_events()
