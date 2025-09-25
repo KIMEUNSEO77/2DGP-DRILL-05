@@ -12,7 +12,7 @@ idle_right = False
 x, y = 600, 500   # 처음 위치는 600, 500
 
 def handle_events():
-    global running
+    global running, idle_right
     events = get_events()
     for event in events:
         if event.type == SDL_QUIT:
@@ -46,7 +46,7 @@ while running:
 
     if idle_right:
         sx, sy, sw, sh = idle[0]
-        character.draw_clip(sx, sy, sw, sh, x, y)
+        character.clip_draw(sx, sy, sw, sh, x, y)
 
     update_canvas()
     handle_events()
