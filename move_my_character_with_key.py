@@ -70,6 +70,9 @@ while running:
 
     pickDir()
 
+    x += dx
+    y += dy
+
     if idle_right:
         sx, sy, sw, sh = idle[0]
         character.clip_draw(sx, sy, sw, sh, x, y)
@@ -77,7 +80,7 @@ while running:
         sx, sy, sw, sh = idle[1]
         character.clip_draw(sx, sy, sw, sh, x, y)
     else:
-        character.clip_draw(0, 100, w, h, x + dx, y + dy)
+        character.clip_draw(0, 100, w, h, x, y)
 
     update_canvas()
     handle_events()
