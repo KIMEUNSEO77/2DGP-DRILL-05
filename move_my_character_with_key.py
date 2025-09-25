@@ -10,6 +10,7 @@ h = 100
 idle = ((0, 300, w, h), (0, 200, w, h))   # 오른쪽, 왼쪽
 idle_right = False
 x, y = 600, 500   # 처음 위치는 600, 500
+dirIdx = -1   # 0: 오른쪽, 1: 왼쪽, 2: 위쪽, 3: 아래쪽
 
 def handle_events():
     global running, idle_right
