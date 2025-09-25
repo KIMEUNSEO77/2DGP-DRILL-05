@@ -108,4 +108,5 @@ while running:
 
     update_canvas()
     handle_events()
+
 close_canvas()
