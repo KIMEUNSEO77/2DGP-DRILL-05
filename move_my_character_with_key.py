@@ -18,6 +18,23 @@ def handle_events():
         elif event.type == SDL_KEYDOWN:
             if event.key == SDLK_ESCAPE:
                 running = False
+            elif event.key == SDLK_RIGHT:
+                pass
+            elif event.key == SDLK_LEFT:
+                pass
+            elif event.key == SDLK_UP:
+                pass
+            elif event.key == SDLK_DOWN:
+                pass
+        elif event.type == SDL_KEYUP:
+            if event.key == SDLK_RIGHT:
+                pass
+            elif event.key == SDLK_LEFT:
+                pass
+            elif event.key == SDLK_UP:
+                pass
+            elif event.key == SDLK_DOWN:
+                pass
 
 running = True
 
