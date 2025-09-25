@@ -27,13 +27,13 @@ def handle_events():
             if event.key == SDLK_ESCAPE:
                 running = False
             elif event.key == SDLK_RIGHT:
-                dirIdx = 0
+                dirIdx = 0; idle_right = False; idle_left = False
             elif event.key == SDLK_LEFT:
-                dirIdx = 1
+                dirIdx = 1; idle_right = False; idle_left = False
             elif event.key == SDLK_UP:
-                dirIdx = 2
+                dirIdx = 2; idle_right = False; idle_left = False
             elif event.key == SDLK_DOWN:
-                dirIdx = 3
+                dirIdx = 3; idle_right = False; idle_left = False
         elif event.type == SDL_KEYUP:
             if event.key == SDLK_RIGHT:
                 dirIdx = -1
@@ -44,13 +44,16 @@ def handle_events():
                 idle_right = False
                 idle_left = True
             elif event.key == SDLK_UP:
-                pass
+                dirIdx = -1
+                idle_left = False
+                idle_right = True
             elif event.key == SDLK_DOWN:
-                pass
+                dirIdx = -1
+                idle_right = False
+                idle_left = True
+
 def pickDir():
     global dirIdx
-    if (dirIdx == -1): return
-
     global dx, dy
     if dirIdx == 0:
         dx = 1
@@ -64,9 +67,24 @@ def pickDir():
     elif dirIdx == 3:
         dx = 0
         dy = -1
+    elif dirIdx == -1:
+        dx = 0
+        dy = 0
+
+def play_animation():
+    global dirIdx, x, y, w, h, frame
+    if dirIdx == 0 or dirIdx == 2:
+        frame = (frame + 1) % 8
+        sx, sy, sw, sh = right[frame]  # frame번째 프레임 좌표 꺼내기
+        character.clip_draw(sx, sy, sw, sh, x, y)
+    elif dirIdx == 1 or dirIdx == 3:
+        frame = (frame + 1) % 8
+        sx, sy, sw, sh = left[frame]
+        character.clip_draw(sx, sy, sw, sh, x, y)
 
 running = True
 dx, dy = 0, 0   # 이동 x, y
+frame = 0
 
 while running:
     clear_canvas()
@@ -86,7 +104,7 @@ while running:
         sx, sy, sw, sh = idle[1]
         character.clip_draw(sx, sy, sw, sh, x, y)
     else:
-        character.clip_draw(0, 100, w, h, x, y)
+        play_animation()
 
     update_canvas()
     handle_events()
